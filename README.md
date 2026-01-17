@@ -47,7 +47,7 @@ matching       → lógica de compatibilidade
 impact         → indicadores e resultados sociais
 reviews        → feedback pós-ação
 
-``
+```
 
 ---
 
