@@ -46,3 +46,10 @@ projects       → demandas e projetos sociais
 matching       → lógica de compatibilidade
 impact         → indicadores e resultados sociais
 reviews        → feedback pós-ação
+
+---
+
+👨‍💻 Autor
+
+Robinson Dias
+Enfermeiro, mestre em Educação e desenvolvedor em transição para TI, com foco em projetos que unem tecnologia, cuidado e impacto social.
