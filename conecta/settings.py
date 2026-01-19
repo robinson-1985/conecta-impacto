@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     
     'apps.accounts.apps.AccountsConfig',
     'apps.skills.apps.SkillsConfig',
+    'apps.projects.apps.ProjectsConfig',
 ]
 
 MIDDLEWARE = [
