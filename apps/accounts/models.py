@@ -27,6 +27,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
+    @property
+    def is_volunteer(self):
+        return self.role == "VOLUNTEER"
+
+    @property
+    def is_organization(self):
+        return self.role == "ORGANIZATION"
+    
 
 class VolunteerProfile(models.Model):
     user = models.OneToOneField(

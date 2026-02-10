@@ -1,38 +1,42 @@
 from django.db import models
+from django.conf import settings
 from apps.skills.models import Skill
-from apps.accounts.models import OrganizationProfile
 
 
 class Project(models.Model):
+
     STATUS_CHOICES = [
-        ('OPEN', 'Aberto'),
-        ('IN_PROGRESS', 'Em andamento'),
-        ('COMPLETED', 'Finalizado'),
+        ("OPEN", "Open"),
+        ("IN_PROGRESS", "In Progress"),
+        ("CLOSED", "Closed"),
     ]
-    
+
     organization = models.ForeignKey(
-        OrganizationProfile, 
-        on_delete=models.CASCADE, 
-        related_name='projects'
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="projects_created"
     )
-    
+
     title = models.CharField(max_length=255)
     description = models.TextField()
-    
+
     required_skills = models.ManyToManyField(
         Skill,
-        related_name='projects',
+        blank=True,
+        related_name="projects"
     )
-    
-    is_remote = models.BooleanField(default=False)
-    
+
+    hours_per_week = models.PositiveIntegerField(null=True, blank=True)
+
     status = models.CharField(
-        max_length=20, 
-        choices=STATUS_CHOICES, 
-        default='OPEN'
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="OPEN"
     )
-    
+
+    is_active = models.BooleanField(default=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
-    
+
     def __str__(self):
         return self.title

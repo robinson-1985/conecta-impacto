@@ -7,13 +7,12 @@ from .models import User, OrganizationProfile, VolunteerProfile
 def create_user_profile(sender, instance, created, **kwargs):
     if not created:
         return
-    
-    if created:
-        if instance.is_volunteer:
-            VolunteerProfile.objects.create(user=instance)
-            
-        elif instance.is_organization:
-            OrganizationProfile.objects.create(
-                user=instance,
-                name=instance.email
-            )
+
+    if instance.is_volunteer:
+        VolunteerProfile.objects.create(user=instance)
+
+    elif instance.is_organization:
+        OrganizationProfile.objects.create(
+            user=instance,
+            name=instance.email
+        )
