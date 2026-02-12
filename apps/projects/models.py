@@ -26,17 +26,47 @@ class Project(models.Model):
         related_name="projects"
     )
 
-    hours_per_week = models.PositiveIntegerField(null=True, blank=True)
-
     status = models.CharField(
         max_length=20,
         choices=STATUS_CHOICES,
         default="OPEN"
     )
 
-    is_active = models.BooleanField(default=True)
-
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
+
+
+class Application(models.Model):
+
+    STATUS_CHOICES = [
+        ("PENDING", "Pending"),
+        ("APPROVED", "Approved"),
+        ("REJECTED", "Rejected"),
+    ]
+
+    project = models.ForeignKey(
+        Project,
+        on_delete=models.CASCADE,
+        related_name="applications"
+    )
+
+    volunteer = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="applications"
+    )
+
+    message = models.TextField(blank=True, null=True)
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="PENDING"
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.volunteer} → {self.project}"
