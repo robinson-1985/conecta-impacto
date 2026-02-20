@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Meu painel{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">Meu painel</h2>
+
+<div class="card shadow-sm">
+  <div class="card-body">
+
+    <h5>Minhas candidaturas</h5>
+    <hr>
+
+    {% if applications %}
+        <ul class="list-group">
+        {% for app in applications %}
+            <li class="list-group-item">
+                <strong>{{ app.project.title }}</strong>
+                <br>
+                <small class="text-muted">
+                    Enviado em {{ app.created_at|date:"d/m/Y" }}
+                </small>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Você ainda não se candidatou a nenhum projeto.</p>
+    {% endif %}
+
+  </div>
+</div>
+
+{% endblock %}
